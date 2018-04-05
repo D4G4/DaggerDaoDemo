@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "d4enterprises.daggerdaodemo"
+        minSdkVersion 23
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //region For Dagger
+    compile "com.google.dagger:dagger:2.13"
+    provided 'javax.annotation:jsr250-api:1.0'
+    compile 'javax.inject:javax.inject:1'
+
+    /*We are using the annotation processor provided by gradle for android.
+      Dagger-compiler is the annotation processing repo for generating the dependency
+      graph classes during build time.*/
+    annotationProcessor "com.google.dagger:dagger-compiler:2.13"
+    //endregion
+
+    //region For GreenDao
+    compile 'org.greenrobot:greendao:3.2.2'
+
+    //For database encryption
+    compile 'net.zetetic:android-database-sqlcipher:3.5.7'
+    //endregion
+}
