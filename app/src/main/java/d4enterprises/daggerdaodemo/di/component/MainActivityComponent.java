@@ -16,6 +16,9 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = MainActivityModule.class)
 public interface MainActivityComponent {
-
+    /**
+    Why do I need this? We pass the Activity reference during the initialization too help Dagger finding out which activity
+    needs view injection.
+    */
     void inject(MainActivity activity);
 }
